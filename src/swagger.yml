@@ -1,0 +1,185 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about people and notes and shipments"
+  version: "1.0.0"
+
+# define root path
+servers:
+  - url: "/api"
+
+# define endpoints
+paths:
+  /people:
+    get:
+      operationId: "people_db.read_all"
+      tags:
+        - "People"
+      summary: "Read the list of people"
+      responses:
+        "200":
+          description: "Successfully read people list"
+    post:
+      operationId: "people_db.create"
+      tags:
+        - People
+      summary: "Create a person"
+      # send requestBody to the server
+      requestBody:
+          description: "Person to create"
+          required: True
+          content:
+            # data exchange format 
+            application/json:
+              schema:
+                x-body-name: "person"
+                $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: "Successfully created person"
+
+  /people/{lname}:
+    get:
+      # read_one() function in people_db.py
+      operationId: "people_db.read_one"
+      tags:
+        - People
+      summary: "Read one person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read person"
+    put:
+      tags:
+        - People
+      operationId: "people_db.update"
+      summary: "Update a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully updated person"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "person"
+              $ref: "#/components/schemas/Person"
+    delete:
+      tags:
+        - People
+      operationId: "people_db.delete"
+      summary: "Delete a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "204":
+          description: "Successfully deleted person"
+
+  /shipment/list:
+    get:
+      tags:
+        - shipment
+      summary: searches shipment
+      operationId: view.get
+      description: |
+        By passing in the appropriate options, you can search for
+        available shipment in the system
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/shipmentItem'
+        '400':
+          description: bad input parameter
+          
+  /shipment/create:
+    post:
+      tags:
+        - shipment
+      summary: adds a shipment item
+      operationId: view.post
+      description: Adds an item to the system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shipmentItem'
+        description: shipment item to add
+        
+  /shipment/update/{id}:
+    put:
+      operationId: view.put
+      tags:
+        - shipment
+      summary: Update a Shipment in the people list
+      description: Update a Shipment in the Shipments list
+      parameters:
+        - name: id
+          in: path
+          description: Shipment ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+            
+      responses:
+        200:
+          description: Successfully updated a shipment in Shipments list
+
+
+components:
+  schemas:
+    Person:
+      type: "object"
+      required:
+      # dash in front of lname indicates that 
+      # required can contain a list of properties
+        - lname
+      properties:
+        fname:
+          type: "string"
+        lname:
+          type: "string"
+    shipmentItem:
+      type: object
+
+      properties:
+        item:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        tracking_number:
+          type: string
+        current_location: 
+          type: string
+        source:
+          type: string
+        destination":
+          type: string
+        arrival:
+          type: string
+  parameters:
+    lname:
+      name: "lname"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
