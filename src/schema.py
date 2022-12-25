@@ -1,7 +1,7 @@
 from flask_marshmallow import Marshmallow
 
-from config import db, ma
-from model import Person
+from .flapp.extension import db, ma
+from .model import Person
 
 
 class PersonSchema(ma.SQLAlchemyAutoSchema):

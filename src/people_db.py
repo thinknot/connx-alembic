@@ -1,8 +1,8 @@
 from flask import abort, make_response
 
-from config import db
-from model import Person
-from schema import people_schema, person_schema
+from .flapp.extension import db
+from .model import Person
+from .schema import people_schema, person_schema
 
 
 def read_all():

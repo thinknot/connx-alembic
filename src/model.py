@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
 
-from config import db
+from .flapp.extension import db
 
 
 class Person(db.Model):
