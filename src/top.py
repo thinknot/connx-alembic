@@ -5,8 +5,6 @@ from flask import render_template
 from config import app, connex_app
 from model import db
 
-connex_app.add_api("swagger.yml")
-
 
 @app.route("/")
 def home():
