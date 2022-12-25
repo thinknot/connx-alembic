@@ -1,13 +1,17 @@
 from flask_marshmallow import Marshmallow
 
-ma = Marshmallow()
+from config import db, ma
+from model import Person
+
+
+class PersonSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Person
+        load_instance = True
+        sqla_session = db.session
 
 
 class ShipmentSchema(ma.Schema):
-    """
-    Schema
-    """
-
     class Meta:
         fields = (
             "id",
@@ -21,3 +25,7 @@ class ShipmentSchema(ma.Schema):
             "description",
             "arrival",
         )
+
+
+person_schema = PersonSchema()
+people_schema = PersonSchema(many=True)

@@ -1,6 +1,19 @@
+from datetime import datetime
+
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+from config import db
+
+
+class Person(db.Model):
+    __tablename__ = "person"
+    id = db.Column(db.Integer, primary_key=True)
+    # using lname as the identifier for a person in api calls
+    lname = db.Column(db.String(32), unique=True)
+    fname = db.Column(db.String(32))
+    timestamp = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
 
 class Shipment(db.Model):

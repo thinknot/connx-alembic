@@ -2,14 +2,17 @@ from random import randint
 
 from flask import render_template
 
-from config import app, connex_app
-from model import db
+import config
+from model import Person
+
+app = config.connex_app
+app.add_api(config.basedir / "swagger.yml")
 
 
 @app.route("/")
 def home():
-
-    return render_template("hom.html")
+    people = Person.query.all()
+    return render_template("hom.html", people=people)
 
 
 @app.route("/rand/<int:num>")
@@ -19,5 +22,5 @@ def get_rand_number(num: int):
 
 
 if __name__ == "__main__":
-    db.init_app(app)
+    # db.init_app(app)
     app.run(host="0.0.0.0", port=8000, debug=True)

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 
-from model import Shipment, db
+from config import db
+from model import Shipment
 from schema import ShipmentSchema
 
 
