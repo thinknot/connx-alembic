@@ -1,4 +1,4 @@
-from flask import abort, make_response
+from flask import abort, make_response, Response
 
 from .flapp.extension import db
 from .model import Person
@@ -8,10 +8,11 @@ from .schema import people_schema, person_schema
 def read_all():
     # runs when server receives an HTTP request to GET /api/people
     people = Person.query.all()
+    # works with what it receives and doesn’t filter out any data
     return people_schema.dump(people)
 
 
-def read_one(lname):
+def read_one(lname: str) -> dict:
     person = Person.query.filter(Person.lname == lname).one_or_none()
 
     if person is not None:
@@ -20,7 +21,7 @@ def read_one(lname):
         abort(404, f"Person with last name {lname} not found")
 
 
-def create(person):
+def create(person) -> tuple[dict, int]:
     # request body must contain a last name
 
     lname = person.get("lname")
@@ -36,7 +37,7 @@ def create(person):
         abort(406, f"Person with last name {lname} already exists")
 
 
-def update(lname, person):
+def update(lname, person) -> tuple[dict, int]:
     existing_person = Person.query.filter(Person.lname == lname).one_or_none()
 
     if existing_person:
@@ -49,7 +50,7 @@ def update(lname, person):
         abort(404, f"Person with last name {lname} not found")
 
 
-def delete(lname):
+def delete(lname) -> Response:
     existing_person = Person.query.filter(Person.lname == lname).one_or_none()
 
     if existing_person:
