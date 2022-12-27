@@ -1,6 +1,9 @@
 import logging
+from random import randint
 
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, jsonify, render_template
+
+from ..model import Person
 
 blueprint = Blueprint("core", __name__)
 
@@ -29,3 +32,9 @@ def check_log():
 def get_rand_number(num: int):
     rndo = randint(0, num) if num >= 0 else randint(num, 0)
     return f"A rando between 0 and {num}:  {rndo}"
+
+
+@blueprint.route("/")
+def home():
+    people = Person.query.all()
+    return render_template("hom.html", people=people)
