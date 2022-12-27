@@ -26,6 +26,10 @@ def main():
     logging.debug(console_flaskapp.static_url_path)
     logging.debug(console_flaskapp.static_folder)
 
+    with console_flaskapp.app_context():
+        from src.build_workdb import rebuild_db
+        rebuild_db()
+
     console_flaskapp.run(debug=True, port=8008, request_handler=MyRequestHandler)
 
 
