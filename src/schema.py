@@ -1,5 +1,3 @@
-from flask_marshmallow import Marshmallow
-
 from .flapp.extension import db, ma
 from .model import Person
 
