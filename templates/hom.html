@@ -9,10 +9,16 @@
     <h1>
         Hello, RESTAPI
     </h1>
+    {% for person in people %}
+    <h2>{{ person.fname }} {{ person.lname }}</h2>
     <ul>
-        {% for person in people %}
-        <li>{{ person.fname }} {{ person.lname }}</li>
+        {% for note in person.notes %}
+        <li>
+            {{ note.content }}
+        </li>
         {% endfor %}
-    </ul>    
+    </ul>
+    {% endfor %}
 </body>
 </html>
+
