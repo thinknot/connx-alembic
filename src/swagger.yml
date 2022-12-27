@@ -84,7 +84,7 @@ paths:
       tags:
         - shipment
       summary: searches shipment
-      operationId: src.view.get
+      operationId: src.ship_db.get
       description: |
         By passing in the appropriate options, you can search for
         available shipment in the system
@@ -105,7 +105,7 @@ paths:
       tags:
         - shipment
       summary: adds a shipment item
-      operationId: src.view.post
+      operationId: src.ship_db.post
       description: Adds an item to the system
       responses:
         '201':
@@ -123,7 +123,7 @@ paths:
         
   /shipment/update/{id}:
     put:
-      operationId: src.view.put
+      operationId: src.ship_db.put
       tags:
         - shipment
       summary: Update a Shipment in the people list

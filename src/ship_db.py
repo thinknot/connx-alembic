@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import jsonify, request
 
 from .flapp.extension import db
 from .model import Shipment
