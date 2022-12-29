@@ -2,7 +2,8 @@ from ..flapp.extension import db
 
 
 class Author(db.Model):
-    author_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    # relationship to multiple Books
     books = db.relationship("Book", backref="author")
 
     name = db.Column(db.String)
@@ -12,7 +13,7 @@ class Author(db.Model):
 
 
 class Book(db.Model):
-    book_id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.Integer, db.ForeignKey("author.author_id"))
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
 
     title = db.Column(db.String)

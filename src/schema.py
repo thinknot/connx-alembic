@@ -2,7 +2,7 @@ from marshmallow_sqlalchemy import fields
 
 from .flapp.extension import db, ma
 from .model.ublog import Note, Person
-
+from .model.library import Author, Book
 
 class NoteSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -39,6 +39,16 @@ class ShipmentSchema(ma.Schema):
         )
 
 
-note_schema = NoteSchema()
-person_schema = PersonSchema()
-people_schema = PersonSchema(many=True)
+class AuthorSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = Author
+
+    id = ma.auto_field()
+    name = ma.auto_field()
+    books = ma.auto_field()
+
+
+class BookSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Book
+        include_fk = True
