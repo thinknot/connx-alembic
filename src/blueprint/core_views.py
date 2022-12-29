@@ -3,7 +3,7 @@ from random import randint
 
 from flask import Blueprint, current_app, jsonify, render_template
 
-from ..model import Person
+from ..model.ublog import Person
 
 blueprint = Blueprint("core", __name__)
 

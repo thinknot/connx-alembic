@@ -1,8 +1,8 @@
 from flask import jsonify, request
 
-from .flapp.extension import db
-from .model import Shipment
-from .schema import ShipmentSchema
+from ..flapp.extension import db
+from ..model.mailroom import Shipment
+from ..schema import ShipmentSchema
 
 
 def get(id=None):

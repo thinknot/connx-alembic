@@ -28,6 +28,7 @@ def main():
 
     with console_flaskapp.app_context():
         from src.build_workdb import rebuild_db
+
         rebuild_db()
 
     console_flaskapp.run(debug=True, port=8008, request_handler=MyRequestHandler)

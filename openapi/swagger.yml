@@ -14,7 +14,7 @@ servers:
 paths:
   /people:
     get:
-      operationId: "src.people_db.read_all"
+      operationId: "src.services.people_db.read_all"
       tags:
         - "People"
       summary: "Read the list of people"
@@ -22,7 +22,7 @@ paths:
         "200":
           description: "Successfully read people list"
     post:
-      operationId: "src.people_db.create"
+      operationId: "src.services.people_db.create"
       tags:
         - People
       summary: "Create a person"
@@ -43,7 +43,7 @@ paths:
   /people/{lname}:
     get:
       # read_one() function in people_db.py
-      operationId: "src.people_db.read_one"
+      operationId: "src.services.people_db.read_one"
       tags:
         - People
       summary: "Read one person"
@@ -55,7 +55,7 @@ paths:
     put:
       tags:
         - People
-      operationId: "src.people_db.update"
+      operationId: "src.services.people_db.update"
       summary: "Update a person"
       parameters:
         - $ref: "#/components/parameters/lname"
@@ -71,7 +71,7 @@ paths:
     delete:
       tags:
         - People
-      operationId: "src.people_db.delete"
+      operationId: "src.services.people_db.delete"
       summary: "Delete a person"
       parameters:
         - $ref: "#/components/parameters/lname"
@@ -81,7 +81,7 @@ paths:
 
   /notes:
     post:
-      operationId: "src.notes_db.create"
+      operationId: "src.services.notes_db.create"
       tags:
         - Notes
       summary: "Create a note associated with a person"
@@ -104,7 +104,7 @@ paths:
 
   /notes/{note_id}:
     get:
-      operationId: "src.notes_db.read_one"
+      operationId: "src.services.notes_db.read_one"
       tags:
         - Notes
       summary: "Read one note"
@@ -116,7 +116,7 @@ paths:
     put:
       tags:
         - Notes
-      operationId: "src.notes_db.update"
+      operationId: "src.services.notes_db.update"
       summary: "Update a note"
       parameters:
         - $ref: "#/components/parameters/note_id"
@@ -135,7 +135,7 @@ paths:
     delete:
       tags:
         - Notes
-      operationId: "src.notes_db.delete"
+      operationId: "src.services.notes_db.delete"
       summary: "Delete a note"
       parameters:
         - $ref: "#/components/parameters/note_id"
@@ -148,7 +148,7 @@ paths:
       tags:
         - shipment
       summary: searches shipment
-      operationId: src.ship_db.get
+      operationId: src.services.ship_db.get
       description: |
         By passing in the appropriate options, you can search for
         available shipment in the system
@@ -169,7 +169,7 @@ paths:
       tags:
         - shipment
       summary: adds a shipment item
-      operationId: src.ship_db.post
+      operationId: src.services.ship_db.post
       description: Adds an item to the system
       responses:
         '201':
@@ -187,7 +187,7 @@ paths:
         
   /shipment/update/{id}:
     put:
-      operationId: src.ship_db.put
+      operationId: src.services.ship_db.put
       tags:
         - shipment
       summary: Update a Shipment in the people list

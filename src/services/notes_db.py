@@ -1,8 +1,8 @@
-from flask import abort, make_response, Response
+from flask import Response, abort, make_response
 
-from .flapp.extension import db
-from .model import Note, Person
-from .schema import note_schema
+from ..flapp.extension import db
+from ..model.ublog import Note, Person
+from ..schema import note_schema
 
 
 def read_one(note_id: int) -> dict:

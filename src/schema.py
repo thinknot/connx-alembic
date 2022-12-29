@@ -1,7 +1,7 @@
-from .flapp.extension import db, ma
-from .model import Person, Note
-
 from marshmallow_sqlalchemy import fields
+
+from .flapp.extension import db, ma
+from .model.ublog import Note, Person
 
 
 class NoteSchema(ma.SQLAlchemyAutoSchema):
@@ -18,6 +18,7 @@ class PersonSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
         sqla_session = db.session
         include_relationships = True
+
     # https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested
     notes = fields.Nested(NoteSchema, many=True)
 

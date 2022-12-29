@@ -2,3 +2,4 @@ flask-marshmallow
 flask-sqlalchemy
 marshmallow-sqlalchemy
 connexion[swagger-ui]
+flask

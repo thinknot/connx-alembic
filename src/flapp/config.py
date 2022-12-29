@@ -5,23 +5,22 @@ from typing import Any, Dict
 
 app_settings = os.getenv("APP_SETTINGS", "src.flapp.config.DevConfig")
 
-app_dir = Path(__file__).parent.resolve()
-base_dir = app_dir.parent.resolve()
-template_dir = base_dir.parent.joinpath("templates").resolve()
-abs_file_path = os.path.abspath(os.path.dirname(__file__))
+flapp_dir = Path(__file__).parent.resolve()
+src_dir = flapp_dir.parent.resolve()
+template_dir = src_dir.parent.joinpath("templates").resolve()
 
 if "SPEC_PATH" in os.environ:
-    openapi_path = os.environ["SPEC_PATH"]
+    openapi_dir = os.environ["SPEC_PATH"]
 else:
-    openapi_path = Path(abs_file_path).parent.resolve()
+    openapi_dir = src_dir.parent.joinpath("openapi").resolve()
 
 
 class Config:
-    APP_DIR = base_dir
+    APP_DIR = src_dir
 
     FLASK_APP = "run:console_flaskapp"
 
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{base_dir / 'mishmash.db'}"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{src_dir / 'mishmash.db'}"
 
     # turns the SQLAlchemy event system off. The event system generates events
     # that are useful in event-driven programs, but it adds significant overhead.
