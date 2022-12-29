@@ -21,21 +21,22 @@ console_flaskapp = init_flask_app(devmode=is_main)
 
 
 def main():
-    logging.warning("Flask MAIN")
-    logging.info("Running main() in flask-debug mode. Security Risk!")
-    logging.debug(console_flaskapp.static_url_path)
-    logging.debug(console_flaskapp.static_folder)
+    logging.info("Flask MAIN")
+    logging.warning("Running main() in flask-debug mode. Security Risk!")
 
     with console_flaskapp.app_context():
         from src.build_workdb import rebuild_db
 
         rebuild_db()
 
+    logging.debug(f"flask static_url_path: {console_flaskapp.static_url_path}")
+    logging.debug(f"flask static_folder: {console_flaskapp.static_folder}")
+
     console_flaskapp.run(debug=True, port=8008, request_handler=MyRequestHandler)
 
 
 def wsgi():
-    logging.debug("Flask WSGI")
+    logging.debug("Flask WSGI, assuming gunicorn")
     logging.info("Loading wsgi() in production mode.")
     gunicorn_logger = logging.getLogger("gunicorn.error")
     console_flaskapp.handlers = gunicorn_logger.handlers

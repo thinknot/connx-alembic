@@ -40,7 +40,7 @@ def init_flask_app(devmode=False):
     app.logger.debug("Initializing marshmallow")
     ma.init_app(app)
 
-    app.logger.debug("Loading flask blueprints)")
+    app.logger.debug("Loading flask blueprints")
     with app.app_context():
         init_register_blueprints()
 
