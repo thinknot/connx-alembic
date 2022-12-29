@@ -11,6 +11,7 @@
     </h1>
     {% for person in people %}
     <h2>{{ person.fname }} {{ person.lname }}</h2>
+    Notes
     <ul>
         {% for note in person.notes %}
         <li>
@@ -18,22 +19,17 @@
         </li>
         {% endfor %}
     </ul>
-    {% endfor %}
-
-
-    <h1>
-        Authors and Books
-    </h1>
-    {% for author in authors %}
-    <h2>{{ author.name }}</h2>
+    Books
     <ul>
-        {% for book in author.books %}
+        {% for book in person.books %}
         <li>
             {{ book.title }}
         </li>
         {% endfor %}
     </ul>
+    Quotes
     {% endfor %}
+
 
 
     <h1>

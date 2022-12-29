@@ -4,7 +4,6 @@ from random import randint
 from flask import Blueprint, current_app, jsonify, render_template
 
 from ..model.ublog import Person
-from ..model.library import Author
 
 blueprint = Blueprint("core", __name__)
 
@@ -38,5 +37,4 @@ def get_rand_number(num: int):
 @blueprint.route("/")
 def home():
     people = Person.query.all()
-    authors = Author.query.all()
-    return render_template("hom.html", people=people, authors=authors)
+    return render_template("hom.html", people=people)

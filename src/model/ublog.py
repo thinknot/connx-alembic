@@ -24,7 +24,7 @@ class Person(db.Model):
     __tablename__ = "person"
     id = db.Column(db.Integer, primary_key=True)
 
-    #  relationship to the multiple Notes
+    #  relationship to multiple Notes
     notes = db.relationship(
         # you could use "Note" instead of Note here.
         Note,
@@ -38,10 +38,14 @@ class Person(db.Model):
         # sort the notes in descending order from newest to oldest
         order_by="desc(Note.timestamp)",
     )
+    # a person may be the author of 0 or more Books
+    books = db.relationship("Book", backref="person")
 
+    # relationship to Quotes, see library.py
+
+    fname = db.Column(db.String(64))
     # using lname as the identifier for a person in api calls
-    lname = db.Column(db.String(32), unique=True)
-    fname = db.Column(db.String(32))
+    lname = db.Column(db.String(64), unique=True)
     timestamp = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )

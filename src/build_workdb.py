@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from .flapp.extension import db
-from .model.library import Author, Book
+from .model.library import Book
 from .model.sites import Project, Site
 from .model.sources import Device
 from .model.ublog import Note, Person
@@ -24,7 +24,7 @@ def rebuild_db():
     db.session.commit()
 
     for data in AUTHOR_BOOKS:
-        new_author = Author(name=data.get("name"))
+        new_author = Person(lname=data.get("lname"), fname=data.get("fname"))
         for content in data.get("books"):
             new_author.books.append(Book(title=content))
         db.session.add(new_author)
@@ -181,35 +181,40 @@ PEOPLE_NOTES = [
 
 AUTHOR_BOOKS = [
     {
-        "name": "WizKid",
+        "fname": "Wiz",
+        "lname": "Kid",
         "books": [
             "Gathering Moss",
             "Fixing Everything",
         ],
     },
     {
-        "name": "Davido Opec",
+        "name": "Davido",
+        "lname": "Opec",
         "books": [
             "How to f up the economy",
             "Starlink plus neuralink inhibitor chip",
         ],
     },
-    {"name": "Burna boy", "books": []},
+    {"fname": "Burna boy", "books": []},
     {
-        "name": "Robin Kimmer",
+        "fname": "Robin",
+        "lname": " Kimmer",
         "books": [
             "Braiding Sweetgrass",
         ],
     },
     {
-        "name": "Jay-Z",
+        "fname": "Jay",
+        "lname": "-Z",
         "books": [
             "How to be feared",
             "How to fumble the bag",
         ],
     },
     {
-        "name": "M.T. Richardson",
+        "fname": "M.T.",
+        "lname": "Richardson",
         "books": ["Practical Blacksmithing", "Practical Carriage Building"],
     },
 ]
