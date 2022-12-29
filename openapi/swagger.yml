@@ -3,7 +3,7 @@
 openapi: 3.0.0
 info:
   title: "RP Flask REST API"
-  description: "An API about people and notes and shipments"
+  description: "An API about people who might be authors and notes and shipments and books"
   version: "1.0.0"
 
 # define root path
@@ -14,7 +14,7 @@ servers:
 paths:
   /people:
     get:
-      operationId: "src.services.people_db.read_all"
+      operationId: "src.svc.people.read_all"
       tags:
         - "People"
       summary: "Read the list of people"
@@ -22,7 +22,7 @@ paths:
         "200":
           description: "Successfully read people list"
     post:
-      operationId: "src.services.people_db.create"
+      operationId: "src.svc.people.create"
       tags:
         - People
       summary: "Create a person"
@@ -42,8 +42,8 @@ paths:
 
   /people/{lname}:
     get:
-      # read_one() function in people_db.py
-      operationId: "src.services.people_db.read_one"
+      # read_one() function in people.py
+      operationId: "src.svc.people.read_one"
       tags:
         - People
       summary: "Read one person"
@@ -55,7 +55,7 @@ paths:
     put:
       tags:
         - People
-      operationId: "src.services.people_db.update"
+      operationId: "src.svc.people.update"
       summary: "Update a person"
       parameters:
         - $ref: "#/components/parameters/lname"
@@ -71,7 +71,7 @@ paths:
     delete:
       tags:
         - People
-      operationId: "src.services.people_db.delete"
+      operationId: "src.svc.people.delete"
       summary: "Delete a person"
       parameters:
         - $ref: "#/components/parameters/lname"
@@ -81,7 +81,7 @@ paths:
 
   /notes:
     post:
-      operationId: "src.services.notes_db.create"
+      operationId: "src.svc.notes.create"
       tags:
         - Notes
       summary: "Create a note associated with a person"
@@ -104,7 +104,7 @@ paths:
 
   /notes/{note_id}:
     get:
-      operationId: "src.services.notes_db.read_one"
+      operationId: "src.svc.notes.read_one"
       tags:
         - Notes
       summary: "Read one note"
@@ -116,7 +116,7 @@ paths:
     put:
       tags:
         - Notes
-      operationId: "src.services.notes_db.update"
+      operationId: "src.svc.notes.update"
       summary: "Update a note"
       parameters:
         - $ref: "#/components/parameters/note_id"
@@ -135,7 +135,7 @@ paths:
     delete:
       tags:
         - Notes
-      operationId: "src.services.notes_db.delete"
+      operationId: "src.svc.notes.delete"
       summary: "Delete a note"
       parameters:
         - $ref: "#/components/parameters/note_id"
@@ -148,7 +148,7 @@ paths:
       tags:
         - shipment
       summary: searches shipment
-      operationId: src.services.ship_db.get
+      operationId: src.svc.shipment.get
       description: |
         By passing in the appropriate options, you can search for
         available shipment in the system
@@ -169,7 +169,7 @@ paths:
       tags:
         - shipment
       summary: adds a shipment item
-      operationId: src.services.ship_db.post
+      operationId: src.svc.shipment.post
       description: Adds an item to the system
       responses:
         '201':
@@ -187,7 +187,7 @@ paths:
         
   /shipment/update/{id}:
     put:
-      operationId: src.services.ship_db.put
+      operationId: src.svc.shipment.put
       tags:
         - shipment
       summary: Update a Shipment in the people list

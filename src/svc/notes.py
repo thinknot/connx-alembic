@@ -2,7 +2,9 @@ from flask import Response, abort, make_response
 
 from ..flapp.extension import db
 from ..model.ublog import Note, Person
-from ..schema import note_schema
+from ..schema import NoteSchema
+
+note_schema = NoteSchema()
 
 
 def read_one(note_id: int) -> dict:

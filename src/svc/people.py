@@ -2,7 +2,10 @@ from flask import Response, abort, make_response
 
 from ..flapp.extension import db
 from ..model.ublog import Person
-from ..schema import people_schema, person_schema
+from ..schema import PersonSchema
+
+person_schema = PersonSchema()
+people_schema = PersonSchema(many=True)
 
 
 def read_all():
